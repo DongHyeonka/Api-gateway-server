@@ -42,6 +42,16 @@ class Rfc9457ErrorAttributesTest {
         assertEquals(ExceptionType.UNAUTHENTICATED.getCode(), attributes.get("code"));
     }
 
+    @Test
+    void jwtInvalidSignatureMapsToConfiguredCode() {
+        InvalidTokenException exception = new InvalidTokenException("JWT signature invalid", ExceptionType.JWT_INVALID_SIGNATURE);
+
+        Map<String, Object> attributes = renderAttributes(exception, "/auth");
+
+        assertEquals(ExceptionType.JWT_INVALID_SIGNATURE.getCode(), attributes.get("code"));
+        assertEquals(ExceptionType.JWT_INVALID_SIGNATURE.getTitle(), attributes.get("title"));
+    }
+
     private Map<String, Object> renderAttributes(Throwable throwable, String path) {
         ServerWebExchange exchange = MockServerWebExchange.from(MockServerHttpRequest.get(path).build());
         errorAttributes.storeErrorInformation(throwable, exchange);

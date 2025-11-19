@@ -18,6 +18,8 @@ public enum ExceptionType {
     UNAUTHENTICATED("A002", "인증되지 않음 / Unauthenticated", UNAUTHORIZED),
     JWT_TOKEN_EXPIRED("A003", "만료된 JWT 토큰 / JWT Token Expired", UNAUTHORIZED),
     ACCESS_DENIED("A004", "접근 거부 / Access Denied", FORBIDDEN),
+    JWT_INVALID_SIGNATURE("A005", "잘못된 서명 / JWT Invalid Signature", UNAUTHORIZED),
+    JWT_INVALID_CLAIM("A006", "잘못된 클레임 / JWT Invalid Claim", UNAUTHORIZED),
 
     // Gxxx: Gateway routing
     ROUTE_NOT_FOUND("G001", "라우트 없음 / Route Not Found", NOT_FOUND),
